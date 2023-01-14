@@ -1,0 +1,7 @@
+{
+  "name": "wtd-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Louis Smith <15144861+smudger@users.noreply.github.com>",
+  "license": "MIT"
+}
