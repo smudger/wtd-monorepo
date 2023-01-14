@@ -1,7 +1,23 @@
 {
   "name": "wtd-monorepo",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "Louis Smith <15144861+smudger@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/web",
+    "packages/wtd-lib/pkg"
+  ],
+  "scripts": {
+    "web:dev": "yarn workspace web dev",
+    "web:build": "yarn workspace web build",
+    "wtd:dev": "cd packages/wtd-lib && cargo watch -i .gitignore -i \"pkg/*\" -s \"wasm-pack build --target web\"",
+    "wtd:build": "cd packages/wtd-lib && wasm-pack build --target web",
+    "dev": "concurrently --kill-others-on-fail \"yarn web:dev\"  \"yarn wtd:dev\"",
+    "build": "yarn wtd:build && yarn web:build",
+    "ci:build": "yarn wtd:build && yarn && yarn web:build"
+  },
+  "dependencies": {
+    "concurrently": "^6.3.0"
+  }
 }
